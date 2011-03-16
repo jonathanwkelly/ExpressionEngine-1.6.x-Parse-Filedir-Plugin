@@ -1,0 +1,9 @@
+Will take a file upload directory and return its path. Useful for things like category descriptions where these are not currently parsed.
+
+{exp:parse_filedir}
+
+{filedir_#}
+
+{/exp:parse_filedir}
+
+Will return /path/to/filedir/
