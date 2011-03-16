@@ -49,8 +49,15 @@ class Parse_filedir {
 		
 		// If we have a match, try to find the file upload prefs in the DB
 		if(count($matches) && isset($matches[1][0])) {
+			
+			// Clean all the IDs before we query the DB with them
+			$ids = array();
+			foreach($matches[1] as $id) {
+				$ids[] = intval($id);
+			}
+			
 			// Get all the paths from the DB, based on what was matched
-			$q = "SELECT `id`, `url` FROM `".$DB->prefix."upload_prefs` WHERE `id` IN ('".implode("','", $matches[1])."') LIMIT 1";
+			$q = "SELECT `id`, `url` FROM `".$DB->prefix."upload_prefs` WHERE `id` IN ('".implode("','", $ids)."') LIMIT 1";
 			$query = $DB->query($q);
 			if(count($query->result)) {
 				foreach($query->result as $result) {
